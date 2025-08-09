@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    --f-main2: "Libertinus Sans", sans-serif;
+    --f-main: "Inter", sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--f-main);
+}
+
+body {
+    background-color: rgb(15,15,15);
+    position: relative;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../assets/dark-bg.svg);
+    background-position: center;
+    z-index: -1;
+    opacity: 0.05;
+}

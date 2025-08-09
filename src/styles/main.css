@@ -1,0 +1,333 @@
+/* MAIN */
+
+main {
+    --width: 500px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 30px;
+    row-gap: 30px;
+}
+
+/*
+
+    MAIN HEADER
+
+*/
+
+.main-header {
+    width: var(--width);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-header-text {
+    color: white;
+    font-weight: 400;
+    font-family: var(--f-main2);
+    text-transform: uppercase;
+}
+
+/* TOGGLE */
+
+.main-header-toggle {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.main-header-toggle-header {
+    color: white;
+    font-weight: 400;
+}
+
+.main-header-toggle-button {
+    width: 43px;
+    height: 21px;
+    border-radius: 5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background-color: rgb(15,15,15);
+    cursor: pointer;
+    position: relative;
+}
+
+.main-header-toggle-button-inner {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: rgb(201, 54, 0);
+    border-radius: 2rem;
+    transition: left 200ms;
+}
+
+.main-header-toggle-button:hover .main-header-toggle-button-inner {
+    background-color: orangered;
+}
+
+.main-header-toggle-button:active .main-header-toggle-button-inner {
+    background-color: rgb(222, 59, 0);
+}
+
+.main-header-toggle-button:focus-within {
+    outline: 1px solid orangered;
+}
+
+/* TOGGLE ACTIVE */
+
+.main-header-toggle-button-active .main-header-toggle-button-inner {
+    left: calc(100% - 18.2px);
+}
+
+/*
+
+    MAIN INPUT FILTER
+
+*/
+
+.main-input-filter {
+    width: var(--width);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+/* MAIN INPUT */
+
+.main-input {
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.main-input-itself {
+    padding-inline: 15px;
+    font-size: 1rem;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    color: white;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.main-input-button {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 15px;
+    border-left: 1px solid rgba(255,255,255,0.05);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.main-input-button-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.main-input-button:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.main-input-button:active {
+    background-color: rgba(255,255,255,0.03);
+}
+
+.main-input-itself:focus-within,
+.main-input-button:not(.main-input-button:active, .main-input-button:hover):focus-within {
+    outline: 1px solid orangered;
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* MAIN FILTER */
+
+.main-filter {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.main-filter-button {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: gray;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.main-filter-button:not(.main-filter-button-active):hover {
+    color: white;
+    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.05);
+}
+
+.main-filter-button:not(.main-filter-button-active):active {
+    color: white;
+    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.03);
+}
+
+.main-filter-button-active {
+    color: white;
+    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.05);
+}
+
+.main-filter-button:focus-within {
+    color: white;
+    background-color: rgba(255,255,255,0.05);
+    outline: 1px solid orangered;
+}
+
+.main-filter-button-active:focus-within {
+    outline: 1px solid orangered;
+    background-color: rgba(255,255,255,0.05);
+}
+
+
+/* 
+
+    MAIN OUTPUTS
+
+*/
+
+.main-outputs {
+    width: var(--width);
+    display: flex;
+    flex-direction: column;
+}
+
+/* MAIN OUTPUT */
+
+.main-output {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    column-gap: 5px;
+    align-items: center;
+}
+
+.main-output:last-of-type {
+    border: 0;
+}
+
+/* MAIN OUTPUT CHECKBOX */
+
+.main-output-checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 10px;
+}
+
+.main-output-checkbox-input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.05);
+    cursor: pointer;
+    position: relative;
+}
+
+.main-output-checkbox-input:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.main-output-checkbox-input:checked {
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+.main-output-checkbox-input:checked::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../assets/checked.svg) no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* MAIN OUTPUT EDIT BUTTON */
+
+.main-output-edit-button {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-inline: 10px;
+    column-gap: 10px;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-output-edit-button-id {
+    color: rgb(150,150,150);
+    font-weight: 400;
+}
+
+.main-output-edit-button-todo-text {
+    color: white;
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.main-output-edit-button:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.main-output-edit-button:active {
+    background-color: rgba(255,255,255,0.03);
+}
+
+/* MAIN OUTPUT DELETE BUTTON */
+
+.main-output-delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 5px;
+    border-radius: 0.2rem;
+    background-color: rgba(255,255,255,0.05);
+}
+
+.main-output-delete-button-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.main-output-delete-button:hover {
+    background-color: red;
+}
+
+.main-output-delete-button:active {
+    background-color: rgb(218, 0, 0);
+}
