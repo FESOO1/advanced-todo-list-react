@@ -1,0 +1,154 @@
+/* THEME */
+
+.light-mode-js {
+    --dark-blue: rgb(12, 12, 20);
+    background-color: rgb(250,250,250);
+}
+
+.light-mode-js::before {
+    background: url(../assets/light-bg.svg) no-repeat;
+    background-size: cover;
+    opacity: 0.1;
+}
+
+/* MAIN HEADER */
+
+.light-mode-js .main-header-text,
+.light-mode-js .main-header-toggle-header {
+    color: var(--dark-blue);
+    font-weight: 500;
+}
+
+.light-mode-js .main-header-toggle-button {
+    border: 1px solid rgba(0,0,0,0.25);
+    background-color: white;
+}
+
+.light-mode-js .main-input {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.light-mode-js .main-input-itself {
+    color: var(--dark-blue);
+}
+
+.light-mode-js .main-input-button {
+    border-left: 1px solid rgba(0,0,0,0.15);
+}
+
+.light-mode-js .main-input-button-svg {
+    display: none;
+}
+
+.light-mode-js .main-input-button-svg-second {
+    display: unset;
+}
+
+.light-mode-js .main-input-button:hover {
+    background-color: white;
+}
+
+.light-mode-js .main-input-button:active {
+    background-color: rgb(250,250,250);
+}
+
+/* MAIN FILTER */
+
+.light-mode-js .main-filter-button {
+    color: rgb(180,180,180);
+}
+
+.light-mode-js .main-filter-button:hover {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.15);
+    color: var(--dark-blue);
+}
+
+.light-mode-js .main-filter-button:not(.main-filter-button-active):active {
+    background-color: rgb(250,250,250);
+}
+
+.light-mode-js .main-filter-button-active {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.15);
+    color: var(--dark-blue);
+}
+
+.light-mode-js .main-filter-button:not(.main-filter-button:active):focus-within {
+    color: var(--dark-blue);
+    background-color: white;
+    outline: 1px solid orangered;
+}
+
+.light-mode-js .main-filter-button-active:not(.main-filter-button:active):focus-within {
+    outline: 1px solid orangered;
+    background-color: white;
+}
+
+/* MAIN OUTPUT */
+
+.light-mode-js .main-output {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+.light-mode-js .main-output-done .main-output-edit-button-todo-text,
+.light-mode-js .main-output-done .main-output-edit-button-id {
+    color: gray;
+}
+
+.light-mode-js .main-output:last-of-type {
+    border: 0;
+}
+
+.light-mode-js .main-output-checkbox-input {
+    border: 1px solid rgba(0,0,0,0.15);
+    background-color: rgb(245,245,245);
+}
+
+.light-mode-js .main-output-checkbox-input:checked {
+    background-color: white;
+}
+
+.light-mode-js .main-output-edit-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode-js .main-output-edit-button:active {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.light-mode-js .main-output-edit-button-id {
+    color: var(--dark-blue);
+}
+
+.light-mode-js .main-output-checkbox-input:checked::before {
+    background: url(../assets/checked-black.svg) no-repeat;
+    background-size: cover;
+}
+
+.light-mode-js .main-output-edit-button-todo-text {
+    color: var(--dark-blue);
+    font-weight: 500;
+}
+
+.light-mode-js .main-output-delete-button {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.light-mode-js .main-output-delete-button:hover {
+    background-color: red;
+}
+
+.light-mode-js .main-output-delete-button:active {
+    background-color: rgb(218, 0, 0);
+}
+
+.light-mode-js .main-output-delete-button-svg {
+    display: none;
+}
+
+.light-mode-js .main-output-delete-button-svg-second {
+    display: unset;
+}

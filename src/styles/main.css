@@ -73,7 +73,7 @@ main {
     background-color: rgb(222, 59, 0);
 }
 
-.main-header-toggle-button:focus-within {
+.main-header-toggle-button:not(.main-header-toggle-button:active):focus-within {
     outline: 1px solid orangered;
 }
 
@@ -138,6 +138,12 @@ main {
     height: 20px;
 }
 
+.main-input-button-svg-second {
+    display: none;
+    width: 20px;
+    height: 20px;
+}
+
 .main-input-button:hover {
     background-color: rgba(255,255,255,0.05);
 }
@@ -191,13 +197,13 @@ main {
     background-color: rgba(255,255,255,0.05);
 }
 
-.main-filter-button:focus-within {
+.main-filter-button:not(.main-filter-button:active):focus-within {
     color: white;
     background-color: rgba(255,255,255,0.05);
     outline: 1px solid orangered;
 }
 
-.main-filter-button-active:focus-within {
+.main-filter-button-active:not(.main-filter-button:active):focus-within {
     outline: 1px solid orangered;
     background-color: rgba(255,255,255,0.05);
 }
@@ -227,6 +233,11 @@ main {
 
 .main-output:last-of-type {
     border: 0;
+}
+
+.main-output-done .main-output-edit-button-todo-text {
+    text-decoration: line-through;
+    color: gray;
 }
 
 /* MAIN OUTPUT CHECKBOX */
@@ -320,6 +331,12 @@ main {
 }
 
 .main-output-delete-button-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.main-output-delete-button-svg-second {
+    display: none;
     width: 20px;
     height: 20px;
 }
