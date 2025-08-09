@@ -15,6 +15,21 @@ function TodoList() {
     const [input, setInput] = useState('');
     const [filterButtons, setFilterButtons] = useState([{ id: 0, text: 'ALL', isActive: true }, { id: 1, text: 'IN PROGRESS', isActive: false }, { id: 2, text: 'DONE', isActive: false }]);
 
+    useEffect(() => {
+        const todosLS = JSON.parse(localStorage.getItem('todosLS'));
+
+        // TODOS ARRAY
+        if (todosLS) {
+            setTodos(todosLS);
+        };
+
+        // TODO COUNTER
+        const counterLS = localStorage.getItem('counterLS');
+        if (counterLS) {
+            setTodoCounter(Number(counterLS - 1));
+        };
+    }, []);
+
     // HANDLE INPUT
     function handleInput(value) {
         setInput(value);
@@ -36,19 +51,18 @@ function TodoList() {
     // HANDLE CHECKBOX
     function handleCheckbox(index) {
         const todosArr = todos.slice('');
-
         for (let i = 0; i < todosArr.length; i++) {
             if (todosArr[i].id === index) {
                 index = i;
             };
         };
-
         if (!todosArr[index].isDone) {
             todosArr[index].isDone = true;
         } else {
             todosArr[index].isDone = false;
         };
         setTodos(todosArr);
+        localStorage.setItem('todosLS', JSON.stringify(todosArr));
     };
 
     // HANDLE DELETE
@@ -63,6 +77,7 @@ function TodoList() {
 
         todosArr.splice(index, 1);
         setTodos(todosArr);
+        localStorage.setItem('todosLS', JSON.stringify(todosArr));
     };
 
     // HANDLE SUBMIT FORM
@@ -74,19 +89,21 @@ function TodoList() {
             const currentDate = new Date();
             const formatDate = new Intl.DateTimeFormat('en-US', { timeStyle: 'short', dateStyle: 'short' });
             const date = formatDate.format(currentDate);
-            counter++;
             const todosArr = todos.slice('');
             todosArr.push(
                 {
-                    id: todoCounter,
+                    id: counter,
                     isDone: false,
                     value: input,
                     date: date,
                 },
             );
+            counter++;
             setTodos(todosArr);
             setInput('');
             setTodoCounter(counter++);
+            localStorage.setItem('counterLS', counter);
+            localStorage.setItem('todosLS', JSON.stringify(todosArr));
         };
     };
 
@@ -104,15 +121,26 @@ function TodoList() {
 function TodoListHeader() {
     const [isLightMode, setIsLightMode] = useState(false);
 
+    useEffect(() => {
+        const themeLS = localStorage.getItem('themeLS');
+
+        console.log(themeLS);
+
+        if (themeLS === 'true') {
+            document.body.classList.add('light-mode-js');
+            setIsLightMode(true);
+        };
+    }, []);
+
     function handleToggle() {
         if (!isLightMode) {
             document.body.classList.add('light-mode-js');
             setIsLightMode(true);
-            localStorage.setItem('themeLS', isLightMode);
+            localStorage.setItem('themeLS', true);
         } else {
             document.body.classList.remove('light-mode-js');
             setIsLightMode(false);
-            localStorage.setItem('themeLS', isLightMode);
+            localStorage.setItem('themeLS', false);
         };
     };
 

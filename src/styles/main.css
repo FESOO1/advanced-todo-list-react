@@ -110,6 +110,7 @@ main {
 }
 
 .main-input-itself {
+    width: 100%;
     padding-inline: 15px;
     font-size: 1rem;
     background-color: transparent;
@@ -356,4 +357,12 @@ main {
 .main-output-empty-svg {
     width: 17px;
     height: 17px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 550px) {
+    main {
+        --width: calc(100% - 40px);
+    }
 }
