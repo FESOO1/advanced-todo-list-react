@@ -282,8 +282,8 @@ main {
     column-gap: 10px;
     background-color: transparent;
     border: 0;
-    outline: none;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .main-output-edit-button-id {
@@ -295,7 +295,6 @@ main {
     color: white;
     font-size: 1rem;
     text-align: left;
-    line-height: 1.5;
     font-weight: 300;
 }
 

@@ -124,8 +124,6 @@ function TodoListHeader() {
     useEffect(() => {
         const themeLS = localStorage.getItem('themeLS');
 
-        console.log(themeLS);
-
         if (themeLS === 'true') {
             document.body.classList.add('light-mode-js');
             setIsLightMode(true);
@@ -148,7 +146,7 @@ function TodoListHeader() {
         <div className='main-header'>
             <h3 className='main-header-text'>Fing List</h3>
             <div className='main-header-toggle'>
-                <h6 className='main-header-toggle-header'>DARK MODE</h6>
+                <h6 className='main-header-toggle-header'>{isLightMode ? 'LIGHT MODE' : 'DARK MODE'}</h6>
                 <button className={isLightMode ? 'main-header-toggle-button main-header-toggle-button-active' : 'main-header-toggle-button'} onClick={handleToggle} type='button'>
                     <div className='main-header-toggle-button-inner'></div>
                 </button>
@@ -205,8 +203,6 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete 
         } else if (currentFilter === 'ALL') {
             return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         };
-
-        return 0;
     });
 
     // RETURN AN EMPTY CONTAINER
@@ -224,6 +220,8 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete 
                     return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
                 } else if (currentFilter === 'ALL') {
                     return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+                } else {
+                    console.log(true);
                 };
             })}
         </div>
@@ -249,7 +247,7 @@ function TodoListOuputItself({ todo, onChangeCheckbox, onClickDelete }) {
     const isDone = todo.isDone;
     const classes = isDone ? 'main-output main-output-done' : 'main-output';
     const idText = todo.id + 1;
-    const value = todo.value.length > 45 ? todo.value.slice(0, 45) + '...' : todo.value;
+    const value = todo.value.length > 40 ? todo.value.slice(0, 40) + '...' : todo.value;
 
     return (
         <div className={classes}>
