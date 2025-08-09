@@ -331,3 +331,29 @@ main {
 .main-output-delete-button:active {
     background-color: rgb(218, 0, 0);
 }
+
+/* MAIN OUTPUT EMPTY */
+
+.main-output-empty {
+    width: var(--width);
+    background-color: rgba(255,255,255,0.03);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    padding: 20px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+.main-output-empty-text {
+    color: white;
+    font-weight: 200;
+}
+
+.main-output-empty-svg {
+    width: 17px;
+    height: 17px;
+}
