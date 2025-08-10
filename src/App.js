@@ -14,7 +14,8 @@ function TodoList() {
     const [currentFilter, setCurrentFilter] = useState('ALL');
     const [input, setInput] = useState('');
     const [filterButtons, setFilterButtons] = useState([{ id: 0, text: 'ALL', isActive: true }, { id: 1, text: 'IN PROGRESS', isActive: false }, { id: 2, text: 'DONE', isActive: false }]);
-    let svgColor = 'white';
+    const [beingViewedTodo, setBeingViewedTodo] = useState(null);
+    const [isViewOpen, setIsViewOpen] = useState(false);
 
     useEffect(() => {
         const todosLS = JSON.parse(localStorage.getItem('todosLS'));
@@ -108,11 +109,34 @@ function TodoList() {
         };
     };
 
+    // HANDLE SAVE EDIT
+    function handleSaveEdit(index, newValue) {
+        const todosArr = todos.slice('');
+
+        for (let i = 0; i < todosArr.length; i++) {
+            if (todosArr[i].id === index) {
+                index = i;
+            };
+        };
+
+        todosArr[index].value = newValue;
+        setTodos(todosArr);
+        localStorage.setItem('todosLS', JSON.stringify(todosArr));
+    };
+
+    // HANDLE OPEN VIEWER BUTTONS
+    function handleOpenViewerButtons(todo) {
+        const obj = todo;
+        setIsViewOpen(true);
+        setBeingViewedTodo(obj);
+    };
+
     return (
         <main>
             <TodoListHeader />
             <TodoListInputFilter onSubmitTodo={handleSubmitForm} input={input} onChangeInput={handleInput} filterButtons={filterButtons} onClickFilterButtons={handleFilter} />
-            <TodoListOutput todos={todos} currentFilter={currentFilter} onChangeCheckbox={handleCheckbox} onClickDelete={handleDelete} />
+            <TodoListOutput onClickEditButton={handleOpenViewerButtons} todos={todos} currentFilter={currentFilter} onChangeCheckbox={handleCheckbox} onClickDelete={handleDelete} />
+            {isViewOpen ? <TodoListViewer isViewOpen={isViewOpen} setIsViewOpen={setIsViewOpen} beingViewedTodo={beingViewedTodo} onClickSaveButton={handleSaveEdit} /> : ''}
         </main>
     );
 };
@@ -198,14 +222,14 @@ function TodoListFilter({ filterButtons, onClickFilterButtons }) {
     );
 };
 
-function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete }) {
+function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete, onClickEditButton }) {
     const numberOfElements = todos.map(todo => {
         if (currentFilter === 'IN PROGRESS' && !todo.isDone) {
-            return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+            return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         } else if (currentFilter === 'DONE' && todo.isDone) {
-            return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+            return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         } else if (currentFilter === 'ALL') {
-            return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+            return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         };
     });
 
@@ -219,14 +243,14 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete 
         <div className='main-outputs'>
             {todos.map(todo => {
                 if (currentFilter === 'IN PROGRESS' && !todo.isDone) {
-                    return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+                    return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
                 } else if (currentFilter === 'DONE' && todo.isDone) {
-                    return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+                    return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
                 } else if (currentFilter === 'ALL') {
-                    return <TodoListOuputItself key={todo.id} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
-                } else {
+                    return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
+                }/*  else {
                     console.log(true);
-                };
+                }; */
             })}
         </div>
     );
@@ -247,7 +271,7 @@ function TodoListOutputEmpty() {
     );
 };
 
-function TodoListOuputItself({ todo, onChangeCheckbox, onClickDelete }) {
+function TodoListOuputItself({ todo, onChangeCheckbox, onClickDelete, onClickEditButton }) {
     const isDone = todo.isDone;
     const classes = isDone ? 'main-output main-output-done' : 'main-output';
     const idText = todo.id + 1;
@@ -258,7 +282,7 @@ function TodoListOuputItself({ todo, onChangeCheckbox, onClickDelete }) {
             <div className='main-output-checkbox'>
                 <input type='checkbox' className='main-output-checkbox-input' checked={isDone} onChange={(e) => onChangeCheckbox(todo.id)} />
             </div>
-            <button className='main-output-edit-button' type='button'>
+            <button className='main-output-edit-button' type='button' onClick={() => onClickEditButton(todo)}>
                 <h5 className='main-output-edit-button-id'>#{idText}</h5>
                 <p className='main-output-edit-button-todo-text'>{value}</p>
             </button>
@@ -276,6 +300,86 @@ function TodoListOuputItself({ todo, onChangeCheckbox, onClickDelete }) {
                     <path d="M14.5 16.5L14.5 10.5" stroke="black" strokeWidth="1.5" strokeLinecap="round"></path>
                 </svg>
             </button>
+        </div>
+    );
+};
+
+// TODO LIST VIEWER
+
+function TodoListViewer({ isViewOpen, setIsViewOpen, beingViewedTodo, onClickSaveButton }) {
+    const [isEditable, setIsEditable] = useState(false);
+    const [canSave, setCanSave] = useState(false);
+    const [editInput, setEditInput] = useState(beingViewedTodo.value);
+    const todoDate = beingViewedTodo.date;
+    const buttons = () => {
+        if (isEditable) {
+            return (
+                <>
+                    <button onClick={handleCancel} className='main-viewer-inner-button' type='button'>CANCEL</button>
+                    <button disabled={canSave ? false : true} className='main-viewer-inner-button' type='button' onClick={() => {
+                        onClickSaveButton(beingViewedTodo.id, editInput);
+                        setIsEditable(false);
+                        setCanSave(false);
+                    }}>SAVE</button>
+                </>
+            );
+        } else {
+            return (
+                <button className='main-viewer-inner-button' type='button' onClick={handleEdit}>EDIT</button>
+            );
+        };
+    };
+
+    // HANDLE EDIT
+    function handleEdit() {
+        setIsEditable(true);
+    };
+
+    // HANDLE CANCEL
+    function handleCancel() {
+        setIsEditable(false);
+        setEditInput(beingViewedTodo.value);
+        setCanSave(false);
+    };
+
+    // HANDLE INPUT
+    function handleInput(inputValue) {
+        if (!canSave) {
+            setCanSave(true);
+        } else if (editInput.length === 1) {
+            setCanSave(false);
+        };
+        setEditInput(inputValue);
+    };
+
+    // HANDLE CLOSE VIEWER
+    function handleCloseViewer() {
+        setIsViewOpen(false);
+    };
+
+    return (
+        <div className={isViewOpen ? 'main-viewer main-viewer-shown' : 'main-viewer'}>
+            <button className='main-viewer-close-button' type='button' onClick={handleCloseViewer}>
+                <svg className='main-viewer-close-button-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#ffffff" fill="none">
+                    <path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                </svg>
+                <svg className='main-viewer-close-button-svg-second' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#000000" fill="none">
+                    <path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                </svg>
+            </button>
+            <div className='main-viewer-inner'>
+                <h2 className='main-viewer-inner-header'>FING LIST</h2>
+                <div className='main-viewer-inner-todo'>
+                    <label htmlFor='todoInput' className='main-viewer-inner-todo-label'>
+                        <h4 className='main-viewer-inner-todo-label-header'>TODO:</h4>
+                        <textarea onInput={(e) => handleInput(e.currentTarget.value)} disabled={isEditable ? false : true} id='todoInput' name='todo_input' className='main-viewer-inner-todo-label-input' value={editInput}></textarea>
+                    </label>
+                    <p className='main-viewer-inner-todo-label-date'>{todoDate}</p>
+                </div>
+                <div className='main-viewer-inner-buttons' style={{ display: 'grid', gridTemplateColumns: isEditable ? 'repeat(2, 1fr)' : '1fr' }}>
+                    {buttons()}
+                </div>
+            </div>
         </div>
     );
 };

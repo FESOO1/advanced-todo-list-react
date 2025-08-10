@@ -375,10 +375,166 @@ main {
     height: 17px;
 }
 
+/* MAIN VIEWER */
+
+.main-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.03);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.main-viewer-shown {
+    display: flex;
+}
+
+.main-viewer-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    border-radius: 0.5rem;
+    padding: 5px;
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+}
+
+.main-viewer-close-button:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.main-viewer-close-button:active {
+    background-color: rgba(255,255,255,0.07);
+}
+
+.main-viewer-close-button-svg-second {
+    display: none;
+}
+
+.main-viewer-inner {
+    width: var(--width);
+    padding: 10px;
+    border-radius: 0.3rem;
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.main-viewer-inner-header {
+    color: white;
+    font-family: var(--f-main2);
+    text-align: center;
+    font-weight: 500;
+}
+
+.main-viewer-inner-todo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.main-viewer-inner-todo-label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.main-viewer-inner-todo-label-header {
+    color: white;
+    font-weight: 400;
+}
+
+.main-viewer-inner-todo-label-input {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 200px;
+    min-height: 50px;
+    max-height: 300px;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(255,255,255,0.07);
+    background-color: rgba(255,255,255,0.05);
+    color: white;
+    padding: 7px;
+    font-size: 1rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    line-height: 1.5;
+}
+
+.main-viewer-inner-todo-label-input:disabled {
+    resize: none;
+}
+
+.main-viewer-inner-todo-label-input::-webkit-scrollbar {
+    width: 2px;
+}
+
+.main-viewer-inner-todo-label-input::-webkit-scrollbar-track-piece {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.main-viewer-inner-todo-label-input::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.main-viewer-inner-todo-label-date {
+    color: white;
+    font-weight: 200;
+    text-align: right;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.main-viewer-inner-buttons {
+    gap: 10px;
+}
+
+.main-viewer-inner-button {
+    font-size: 1rem;
+    padding-block: 8px;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    background-color: rgba(255,255,255,0.07);
+    color: white;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.main-viewer-inner-button:hover {
+    background-color: rgba(255,255,255,0.12);
+}
+
+.main-viewer-inner-button:active {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.main-viewer-inner-button:disabled {
+    color: gray;
+    pointer-events: none;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 550px) {
     main {
         --width: calc(100% - 40px);
+    }
+    .main-viewer-close-button {
+        top: 20px;
+        right: 20px;
     }
 }
