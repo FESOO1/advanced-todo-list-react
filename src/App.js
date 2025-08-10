@@ -222,6 +222,8 @@ function TodoListFilter({ filterButtons, onClickFilterButtons }) {
     );
 };
 
+// TODO LIST OUTPUT
+
 function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete, onClickEditButton }) {
     const numberOfElements = todos.map(todo => {
         if (currentFilter === 'IN PROGRESS' && !todo.isDone) {
