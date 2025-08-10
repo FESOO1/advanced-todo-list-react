@@ -375,6 +375,12 @@ main {
     height: 17px;
 }
 
+.main-output-empty-svg-second {
+    width: 17px;
+    height: 17px;
+    display: none;
+}
+
 /* MAIN VIEWER */
 
 .main-viewer {

@@ -153,6 +153,24 @@
     display: unset;
 }
 
+.light-mode-js .main-output-empty {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.light-mode-js .main-output-empty-text {
+    color: var(--dark-blue);
+    font-weight: 400;
+}
+
+.light-mode-js .main-output-empty-svg {
+    display: none;
+}
+
+.light-mode-js .main-output-empty-svg-second {
+    display: unset;
+}
+
 /* MAIN VIEWER */
 
 .light-mode-js .main-viewer {
