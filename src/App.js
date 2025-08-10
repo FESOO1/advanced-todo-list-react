@@ -235,6 +235,8 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete,
         };
     });
 
+    console.log(numberOfElements);
+
     // RETURN AN EMPTY CONTAINER
     if (numberOfElements.length === 0 || todos.length === 0) {
         return <TodoListOutputEmpty />
@@ -250,9 +252,7 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete,
                     return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
                 } else if (currentFilter === 'ALL') {
                     return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
-                }/*  else {
-                    console.log(true);
-                }; */
+                }
             })}
         </div>
     );
