@@ -225,6 +225,7 @@ function TodoListFilter({ filterButtons, onClickFilterButtons }) {
 // TODO LIST OUTPUT
 
 function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete, onClickEditButton }) {
+    'use memo'
     const numberOfElements = todos.map(todo => {
         if (currentFilter === 'IN PROGRESS' && !todo.isDone) {
             return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
@@ -234,8 +235,6 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete,
             return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         };
     });
-
-    console.log(numberOfElements);
 
     // RETURN AN EMPTY CONTAINER
     if (numberOfElements.length === 0 || todos.length === 0) {

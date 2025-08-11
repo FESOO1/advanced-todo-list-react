@@ -38,7 +38,24 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^6.0.0-rc.1"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FESOO1/advanced-todo-list-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FESOO1/advanced-todo-list-react/issues"
+  },
+  "homepage": "https://github.com/FESOO1/advanced-todo-list-react#readme"
 }
