@@ -9,7 +9,6 @@ export default function App() {
 };
 
 function TodoList() {
-    'use memo';
     const [todoCounter, setTodoCounter] = useState(0);
     const [todos, setTodos] = useState([]);
     const [currentFilter, setCurrentFilter] = useState('ALL');
@@ -235,9 +234,10 @@ function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete,
             return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
         };
     });
+    const checkForUndefined = numberOfElements.every(el => el === undefined);
 
     // RETURN AN EMPTY CONTAINER
-    if (numberOfElements.length === 0 || todos.length === 0) {
+    if (numberOfElements.length === 0 || todos.length === 0 || checkForUndefined) {
         return <TodoListOutputEmpty />
     };
 
