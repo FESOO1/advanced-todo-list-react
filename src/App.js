@@ -9,6 +9,7 @@ export default function App() {
 };
 
 function TodoList() {
+    'use memo';
     const [todoCounter, setTodoCounter] = useState(0);
     const [todos, setTodos] = useState([]);
     const [currentFilter, setCurrentFilter] = useState('ALL');
@@ -225,7 +226,6 @@ function TodoListFilter({ filterButtons, onClickFilterButtons }) {
 // TODO LIST OUTPUT
 
 function TodoListOutput({ todos, currentFilter, onChangeCheckbox, onClickDelete, onClickEditButton }) {
-    'use memo'
     const numberOfElements = todos.map(todo => {
         if (currentFilter === 'IN PROGRESS' && !todo.isDone) {
             return <TodoListOuputItself key={todo.id} onClickEditButton={onClickEditButton} todo={todo} onChangeCheckbox={onChangeCheckbox} onClickDelete={onClickDelete} />
